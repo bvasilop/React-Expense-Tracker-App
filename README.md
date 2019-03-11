@@ -18,6 +18,8 @@ yarn run build:prod
 
 node server/server.js
 
+yarn run start
+
 ## Testing with Jest
 
 yarn test -- --watch
