@@ -13,26 +13,60 @@ firebase.initializeApp(config);
 
 const database = firebase.database();
 
-database.ref('expenses').push({
-	description: 'rent',
-	note: 'paid rent',
-	amount: 109500,
-	createdAt: 98797987149
+database.ref('expenses').on('child_changed', (snapshot) => { // updates subscription changes when child is changed
+	console.log(snapshot.key, snapshot.val());
 });
 
-database.ref('expenses').push({
-	description: 'phone bill',
-	note: 'paid phone bill',
-	amount: 5900,
-	createdAt: 96797987149
+database.ref('expenses').on('child_added', (snapshot) => { // updates subscription changes when child is added. gets called on new and existing children in console
+	console.log(snapshot.key, snapshot.val());
 });
 
-database.ref('expenses').push({
-	description: 'food',
-	note: 'paid food bill',
-	amount: 9500,
-	createdAt: 99797987149
-});
+
+
+
+
+
+// database.ref('expenses').on('child_removed', (snapshot) => { // updates subscription changes when child is updated
+// 	console.log(snapshot.key, snapshot.val());
+// });
+
+
+
+// database.ref('expenses').on('value', (snapshot) => { // every time expenses changes, we get a brand new array back
+// 		const expenses = [];
+
+// 	snapshot.forEach((childSnapshot) => {
+// 		expenses.push({
+// 			id: childSnapshot.key, // grabs unique id from firebase object
+// 			...childSnapshot.val()
+// 		});
+// 	});
+// 	console.log(expenses);
+// });
+
+
+
+// database.ref('expenses') // retrieves data from firebase database
+// .once('value')
+// .then((snapshot) => {
+// 	const expenses = [];
+
+// 	snapshot.forEach((childSnapshot) => {
+// 		expenses.push({
+// 			id: childSnapshot.key, // grabs unique id from firebase object
+// 			...childSnapshot.val()
+// 		});
+// 	});
+// 	console.log(expenses);
+// });
+
+// database.ref('expenses').push({
+// 	description: 'rent',
+// 	note: 'paid rent',
+// 	amount: 109500,
+// 	createdAt: 98797987149
+// });
+
 
 // database.ref('notes/-L_sEWMfvb-YItvC1PLV').update({
 // 	body: 'Buy Food'

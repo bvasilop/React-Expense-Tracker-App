@@ -28,12 +28,12 @@ database.ref().set( {
 	console.log('This failed', e);
 });
 
-// database.ref().set('This is my data');
+database.ref().set('This is my data');
 
-// database.ref('instrument').set('Guitar');
-// database.ref('location/city').set('Seattle')
-// database.ref('attributes/height').set('5 ft 9in');
-// database.ref('attributes/weight').set('210lbs');
+database.ref('instrument').set('Guitar');
+database.ref('location/city').set('Seattle')
+database.ref('attributes/height').set('5 ft 9in');
+database.ref('attributes/weight').set('210lbs');
 
 database.ref('attributes').set({ // implements data
 	height: '5 ft 9in',
@@ -60,13 +60,13 @@ database.ref().update({ // updates data
 
 database.ref('isSingle').set(null); // also removed data like remove method
 
-// database.ref('isSingle')
-// .remove()
-// .then(() => {
-// 	console.log('Data was removed');
-// }).catch((e) => {
-// 	console.log('Did not remove data');
-// });
+database.ref('isSingle')
+.remove()
+.then(() => {
+	console.log('Data was removed');
+}).catch((e) => {
+	console.log('Did not remove data');
+});
 
 
 
@@ -169,13 +169,13 @@ setTimeout(() => {
 	database.ref().off('value', onValueChange); // cancels a single subscriptions
 }, 7000);
 
-// setTimeout(() => {
-// 	database.ref().off(); // cancels all subscriptions
-// }, 7000);
+setTimeout(() => {
+	database.ref().off(); // cancels all subscriptions
+}, 7000);
 
-// setTimeout(() => { // changing data with subscriptions in place
-// 	database.ref('age').set(37);
-// }, 10500);
+setTimeout(() => { // changing data with subscriptions in place
+	database.ref('age').set(37);
+}, 10500);
 
 ////////////
 
@@ -186,29 +186,29 @@ database.ref().on('value', (snapshot) => {
 
 /////////// Using arrays with firebase
 
-// const firebaseNotes = {
-// 	notes: {
-// 		abcdefg: { // unique identifier
-// 			title: 'First Note!',
-// 			body: 'This is my note'
-// 		},
-// 		hijklmn: {
-// 			title: 'Another note!',
-// 			body: 'This is my note'
-// 		}
-// 	}
-// };
-// const notes = [{
-// 	id: '12',
-// 	title: 'First note!',
-// 	body: 'This is my note'
-// }, {
-// 	id: '56',
-// 	title: 'Another note!',
-// 	body: 'This is my note'
-// }];
+const firebaseNotes = {
+	notes: {
+		abcdefg: { // unique identifier
+			title: 'First Note!',
+			body: 'This is my note'
+		},
+		hijklmn: {
+			title: 'Another note!',
+			body: 'This is my note'
+		}
+	}
+};
+const notes = [{
+	id: '12',
+	title: 'First note!',
+	body: 'This is my note'
+}, {
+	id: '56',
+	title: 'Another note!',
+	body: 'This is my note'
+}];
 
-// database.ref('notes').set(notes);
+database.ref('notes').set(notes);
 
 
 ///////// way of using push method to create unique id for list based data
@@ -248,3 +248,51 @@ database.ref('expenses').push({
 	createdAt: 99797987149
 });
 
+//////////
+database.ref('expenses') // retrieves data from firebase database
+.once('value')
+.then((snapshot) => {
+	console.log(snapshot.val());
+});
+
+///////////
+
+database.ref('expenses') // retrieves data from firebase database
+.once('value')
+.then((snapshot) => {
+	const expenses = [];
+
+	snapshot.forEach((childSnapshot) => {
+		expenses.push({
+			id: childSnapshot.key, // grabs unique id from firebase object
+			...childSnapshot.val()
+		});
+	});
+	console.log(expenses);
+});
+
+/////////////
+database.ref('expenses').on('value', (snapshot) => { // every time expenses changes, we get a brand new array back
+	const expenses = [];
+
+snapshot.forEach((childSnapshot) => {
+	expenses.push({
+		id: childSnapshot.key, // grabs unique id from firebase object
+		...childSnapshot.val()
+	});
+});
+console.log(expenses);
+});
+
+////////////////////
+database.ref('expenses').on('child_removed', (snapshot) => { // updates subscription changes when child is removed
+	console.log(snapshot.key, snapshot.val());
+});
+
+database.ref('expenses').on('child_changed', (snapshot) => { // updates subscription changes when child is updated
+	console.log(snapshot.key, snapshot.val());
+});
+
+database.ref('expenses').on('child_added', (snapshot) => { // updates subscription changes when child is added. gets called on new and existing children in console
+	console.log(snapshot.key, snapshot.val());
+});
