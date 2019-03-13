@@ -11,6 +11,92 @@ const config = {
 
 firebase.initializeApp(config);
 
-firebase.database().ref().set( {
-	name: 'Bill Vasilopoulos'
+const database = firebase.database();
+
+database.ref('expenses').push({
+	description: 'rent',
+	note: 'paid rent',
+	amount: 109500,
+	createdAt: 98797987149
 });
+
+database.ref('expenses').push({
+	description: 'phone bill',
+	note: 'paid phone bill',
+	amount: 5900,
+	createdAt: 96797987149
+});
+
+database.ref('expenses').push({
+	description: 'food',
+	note: 'paid food bill',
+	amount: 9500,
+	createdAt: 99797987149
+});
+
+// database.ref('notes/-L_sEWMfvb-YItvC1PLV').update({
+// 	body: 'Buy Food'
+// });
+
+// database.ref('notes/-L_sEWMfvb-YItvC1PLV').remove();
+
+// database.ref('notes').push({ // creates unique id for list based data
+// 	title: 'Course Topics',
+// 	body: 'React Native, Angular, Python'
+// });
+
+// database.ref().on('value', (snapshot) => {
+// 	const val = snapshot.val();
+// 	console.log(`${val.name} is a ${val.job.title} at ${val.job.company}`)
+// });
+
+// database.ref().set( { // implements data
+// 	name: 'Bill Vasilopoulos',
+// 	age: 43,
+// 	stressLevel: 6,
+// 	job: {
+// 		title: 'Software Developer',
+// 		company: 'Google',
+// 	},
+// 	location: {
+// 		city: 'Chicago',
+// 		country: 'United States'
+// 	},
+// 	instrument: 'Piano'
+// }).then(() => {
+// 	console.log('Data is saved!');
+// }).catch((e) => {
+// 	console.log('This failed', e);
+// });
+
+// database.ref().update({ // updates data
+// 	stressLevel: 8,
+// 	'job/company': 'Amazon',
+// 	'job/city': 'Seattle',
+// 'location/city': 'Seattle'
+// });
+
+// database.ref('isSingle').set(null); // also removed data like remove method
+
+// database.ref('isSingle')
+// .remove()
+// .then(() => {
+// 	console.log('Data was removed');
+// }).catch((e) => {
+// 	console.log('Did not remove data');
+// });
+
+
+// database.ref('location/city') // fetches data from specific props from objects
+// .once('value')
+// .then((snapshot) => {
+// 	const val = snapshot.val();
+// 	console.log(val);
+// })
+// .catch((e) => {
+// 	console.log('Error fetching data', e);
+// });
+
+
+
+
