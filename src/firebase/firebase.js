@@ -1,12 +1,12 @@
 import * as firebase from 'firebase';
 
 const config = {
-	apiKey: "AIzaSyA5c55lbwXEUaCQVw1wCvPH3WXOrFU2duk",
-	authDomain: "react-expense-tracker-ap-6d6c5.firebaseapp.com",
-	databaseURL: "https://react-expense-tracker-ap-6d6c5.firebaseio.com",
-	projectId: "react-expense-tracker-ap-6d6c5",
-	storageBucket: "react-expense-tracker-ap-6d6c5.appspot.com",
-	messagingSenderId: "815428947239"
+	apiKey: process.env.FIREBASE_API_KEY,
+	authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+	databaseURL: process.env.FIREBASE_DATABASE_URL,
+	projectId: process.env.FIREBASE_PROJECT_ID,
+	storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+	messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID
 };
 
 firebase.initializeApp(config);
@@ -127,3 +127,4 @@ export { firebase, database as default };
 // //   }).catch((e) => {
 // //     console.log('Did not remove data', e);
 // //   });
+
