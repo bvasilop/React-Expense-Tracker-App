@@ -296,3 +296,18 @@ database.ref('expenses').on('child_changed', (snapshot) => { // updates subscrip
 database.ref('expenses').on('child_added', (snapshot) => { // updates subscription changes when child is added. gets called on new and existing children in console
 	console.log(snapshot.key, snapshot.val());
 });
+
+/////////////
+// test('should setup add expense action object with default values', () => {
+// 	const action = addExpense();
+// 	expect(action).toEqual({
+// 		type: 'ADD_EXPENSE',
+// 		expense: {
+// 			id: expect.any(String),
+// 			description: '',
+// 			note: '',
+// 			amount: 0,
+// 			createdAt: 0
+// 			}
+// 		});
+// 	});
