@@ -2,7 +2,7 @@
   "name": "budgetize",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/bvasilop/React-Expense-Tracker-App",
+  "repository": "https://github.com/bvasilop/React-Budgetize-App",
   "author": "Bill Vasilopoulos",
   "license": "MIT",
   "scripts": {
