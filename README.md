@@ -1,4 +1,4 @@
-# 💸 Budgetize React WebApp 💸
+# 💸 React Budgetize WebApp 💸
 
 [![build](https://travis-ci.org/ikatyang/emoji-cheat-sheet.svg?branch=master)](https://travis-ci.org/ikatyang/emoji-cheat-sheet)
 
